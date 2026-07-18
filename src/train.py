@@ -20,3 +20,24 @@ print("True labels:", y_test[:5])
 from sklearn.metrics import accuracy_score
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
+
+import joblib
+joblib.dump(model, "outputs/model.joblib")
+print("Model saved successfully!")
+
+
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+cm = confusion_matrix(y_test, y_pred)
+
+# Display confusion matrix
+disp = ConfusionMatrixDisplay(
+    confusion_matrix=cm,
+    display_labels=iris.target_names
+)
+
+disp.plot()
+plt.title("Iris Classification Confusion Matrix")
+plt.savefig("outputs/confusion_matrix.png")
+plt.close()
+print("Confusion matrix saved successfully!")
